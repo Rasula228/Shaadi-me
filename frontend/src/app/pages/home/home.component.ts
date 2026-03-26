@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { IntakeFormComponent } from '../../components/intake-form/intake-form.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, IntakeFormComponent],
+  imports: [CommonModule, IntakeFormComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -21,20 +21,44 @@ From the Angular app directory:
 ```bash
 cd frontend
 npm install
-npm run start -- --port 3000 --host 0.0.0.0 --proxy-config proxy.conf.json
+npm run start -- --port 3000 --host 127.0.0.1 --proxy-config proxy.conf.json
 ```
 
 Open `http://localhost:3000`.
 
+## Run Both Together
+
+From the repository root:
+
+```bash
+./run-dev.sh
+```
+
+Override ports or hosts if needed:
+
+```bash
+BACKEND_PORT=8001 FRONTEND_PORT=3001 ./run-dev.sh
+```
+
 ## Run The Laravel Backend
 
-The Angular proxy is configured to forward `/api` requests to `http://localhost:8000`, which is the default Laravel dev server port.
+The Angular proxy forwards `/api` requests to `http://localhost:8000`.
 
-Once the Laravel backend is fully bootstrapped, the typical startup command will be:
+From the backend directory:
 
 ```bash
 cd backend
-php artisan serve --host=0.0.0.0 --port=8000
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+php artisan serve --host=127.0.0.1 --port=8000
 ```
 
-At the moment, `backend/` contains Laravel-style application code, but the full Laravel project scaffold is not present yet.
+The backend is now a real Laravel application using SQLite for local development.
+
+## Available API Endpoints
+
+- `POST /api/leads`
+- `GET /api/venues`

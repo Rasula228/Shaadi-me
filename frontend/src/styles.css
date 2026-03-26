@@ -3,9 +3,9 @@
 body {
   background-color: #fdf6f3;
   color: #1a1a1a;
-  font-family: 'Inter', sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .font-serif {
-  font-family: 'Playfair Display', serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
