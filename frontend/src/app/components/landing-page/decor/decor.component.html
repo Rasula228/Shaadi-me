@@ -1,25 +1,33 @@
-<section class="landing-section landing-section-white">
-  <div class="landing-container">
-    <div class="section-heading">
-      <p class="section-eyebrow">Decoration Styles</p>
-      <h2 class="section-title">Decor that feels thought through, not thrown together</h2>
-      <p class="section-copy">
+<section id="decoration" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">✦ Decoration Styles</p>
+      <h2 class="section-title">
+        Decor that feels
+        <br />
+        thought through, not <em>thrown together</em>
+      </h2>
+      <p class="section-sub">
         Every detail should support the atmosphere you want to create, from the mandap to the last table setting.
       </p>
     </div>
 
     <div class="decor-grid">
-      <p-card *ngFor="let style of styles" styleClass="landing-card image-card decor-card">
-        <ng-template pTemplate="content">
-          <img
-            [src]="style.image"
-            [alt]="style.name"
-            [style.object-position]="style.objectPosition"
-            referrerpolicy="no-referrer"
-          />
-          <h3>{{ style.name }}</h3>
-        </ng-template>
-      </p-card>
+      <article *ngFor="let style of styles" class="decor-card" [class.decor-card-large]="style.large">
+        <div class="decor-photo">
+          <div class="decor-photo-inner">
+            <img
+              [src]="style.image"
+              [alt]="style.name"
+              [style.object-position]="style.objectPosition"
+              referrerpolicy="no-referrer"
+            />
+          </div>
+          <div class="decor-label">
+            <p class="decor-name">{{ style.name }}</p>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>

@@ -27,28 +27,27 @@ describe('HomeComponent', () => {
     expect(element.querySelector('app-cities')).toBeTruthy();
     expect(element.querySelector('app-decor')).toBeTruthy();
     expect(element.querySelector('app-themes')).toBeTruthy();
-    expect(element.querySelector('app-why')).toBeTruthy();
+    expect(element.querySelector('app-why')).toBeFalsy();
     expect(element.querySelector('app-venues')).toBeTruthy();
     expect(element.querySelector('app-faq')).toBeTruthy();
   });
 
-  it('changes the active hero when requested', () => {
+  it('uses the React v0.1 content counts for the cloned sections', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     const component = fixture.componentInstance;
 
-    component.setActiveHero(2);
-
-    expect(component.activeHeroIndex).toBe(2);
+    expect(component.heroSlides.length).toBe(4);
+    expect(component.cities.length).toBe(3);
+    expect(component.decorStyles.length).toBe(5);
+    expect(component.themes.length).toBe(5);
+    expect(component.venues.length).toBe(5);
   });
 
-  it('cleans up the hero timer on destroy', () => {
+  it('keeps the planner modal closed by default', () => {
     const fixture = TestBed.createComponent(HomeComponent);
-    const component = fixture.componentInstance;
-    const clearIntervalSpy = spyOn(window, 'clearInterval');
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
 
-    component.ngOnInit();
-    component.ngOnDestroy();
-
-    expect(clearIntervalSpy).toHaveBeenCalled();
+    expect(element.querySelector('app-intake-form')).toBeFalsy();
   });
 });

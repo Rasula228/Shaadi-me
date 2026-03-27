@@ -5,11 +5,6 @@ export interface HeroSlide {
   video: string;
 }
 
-export interface HeroStat {
-  value: string;
-  label: string;
-}
-
 export interface CityCard {
   name: string;
   tagline: string;
@@ -21,6 +16,7 @@ export interface DecorStyleCard {
   name: string;
   image: string;
   objectPosition: string;
+  large?: boolean;
 }
 
 export interface ThemeCard {
