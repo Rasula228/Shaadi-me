@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { IntakeFormComponent } from '../../components/intake-form/intake-form.component';
 
 @Component({
