@@ -72,5 +72,5 @@ export class HomeComponent {
     { q: 'Do you work with destination weddings?', a: 'Yes, destination-style celebrations are part of the worlds we can help shape, whether they are within India or in a getaway setting.' }
   ];
 
-  constructor(public readonly plannerUi: PlannerUiService) {}
+  constructor(public readonly plannerUi: PlannerUiService) { }
 }

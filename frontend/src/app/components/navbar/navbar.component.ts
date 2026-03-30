@@ -14,12 +14,11 @@ export class NavbarComponent {
   navItems = [
     { label: 'Themes', href: '#themes' },
     { label: 'Venues', href: '#venues' },
-    { label: 'Why ShaadiMe', href: '/about' },
     { label: 'Cities', href: '#cities' },
     { label: 'FAQ', href: '#faq' }
   ];
 
-  constructor(private readonly plannerUi: PlannerUiService) {}
+  constructor(private readonly plannerUi: PlannerUiService) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
