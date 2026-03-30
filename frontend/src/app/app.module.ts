@@ -65,6 +65,6 @@ import { FaqComponent } from './components/landing-page/faq/faq.component';
     DividerModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // Trigger rebuild
 })
 export class AppModule { }

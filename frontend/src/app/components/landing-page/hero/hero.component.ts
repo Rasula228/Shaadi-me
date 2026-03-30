@@ -45,6 +45,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   selectSlide(index: number) {
     this.setActiveIndex(index);
+    this.resetAutoplay();
   }
 
   scrollToThemes() {
@@ -59,6 +60,13 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     this.autoplayTimer = window.setInterval(() => {
       this.setActiveIndex((this.activeIndex + 1) % this.slides.length);
     }, 7000);
+  }
+
+  private resetAutoplay() {
+    if (this.autoplayTimer) {
+      window.clearInterval(this.autoplayTimer);
+    }
+    this.startAutoplay();
   }
 
   private setActiveIndex(index: number) {
@@ -77,7 +85,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       video.defaultMuted = true;
       video.volume = 0;
       video.playsInline = true;
-      video.preload = index === this.activeIndex ? 'auto' : 'metadata';
+      video.preload = 'auto';
 
       if (index === this.activeIndex) {
         this.playVideo(video);

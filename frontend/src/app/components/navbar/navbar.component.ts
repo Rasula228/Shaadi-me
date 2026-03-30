@@ -12,9 +12,10 @@ import { PlannerUiService } from '../../services/planner-ui.service';
 export class NavbarComponent {
   isMenuOpen = false;
   navItems = [
+    { label: 'Cities', href: '#cities' },
+    { label: 'Decor Styles', href: '#decoration' },
     { label: 'Themes', href: '#themes' },
     { label: 'Venues', href: '#venues' },
-    { label: 'Cities', href: '#cities' },
     { label: 'FAQ', href: '#faq' }
   ];
 
