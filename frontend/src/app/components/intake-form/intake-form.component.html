@@ -56,27 +56,29 @@
 
       <div class="pf-field-row">
         <div class="pf-field">
-          <label class="pf-label" for="p1name">Partner One</label>
+          <label class="pf-label" for="p1name">Bride</label>
           <input id="p1name" class="pf-input" type="text" placeholder="e.g. Priya"
                  [(ngModel)]="form.p1name" />
         </div>
         <div class="pf-field">
-          <label class="pf-label" for="p2name">Partner Two</label>
+          <label class="pf-label" for="p2name">Groom</label>
           <input id="p2name" class="pf-input" type="text" placeholder="e.g. Arjun"
                  [(ngModel)]="form.p2name" />
         </div>
       </div>
 
-      <div class="pf-field">
-        <label class="pf-label" for="email">Email</label>
-        <input id="email" class="pf-input" type="email" placeholder="you@example.com"
-               [(ngModel)]="form.email" />
-      </div>
+      <div class="pf-field-row">
+        <div class="pf-field anim-delay-1">
+          <label class="pf-label" for="email">Email</label>
+          <input id="email" class="pf-input" type="email" placeholder="you@example.com"
+                 [(ngModel)]="form.email" />
+        </div>
 
-      <div class="pf-field">
-        <label class="pf-label" for="phone">Phone</label>
-        <input id="phone" class="pf-input" type="tel" placeholder="+91 98765 43210"
-               [(ngModel)]="form.phone" />
+        <div class="pf-field anim-delay-2">
+          <label class="pf-label" for="phone">Phone</label>
+          <input id="phone" class="pf-input" type="tel" placeholder="+91 98765 43210"
+                 [(ngModel)]="form.phone" />
+        </div>
       </div>
 
       <div class="pf-field">

@@ -1,6 +1,7 @@
 /* ════════════════════════════════════════════════════════
-   Plan Page — Full-bleed immersive wrapper
-   Matches the ShaadiMe plum / rose / gold landing page DNA
+   Plan Page — Warm, Inviting, Luxurious
+   "Wedding invitation on fine paper" aesthetic
+   60% warm cream · 30% champagne · 10% burgundy + gold
    ════════════════════════════════════════════════════════ */
 
 :host {
@@ -14,42 +15,39 @@
   align-items: center;
   justify-content: flex-start;
   min-height: calc(100vh - 60px);
-  padding: 100px 20px 80px;
+  padding: 80px 20px 80px;
   overflow: hidden;
 
-  /* Deep gradient that mirrors the hero & navbar */
+  /* Warm cream gradient — like sunlit linen */
   background:
-    radial-gradient(ellipse 90% 60% at 20% 10%, rgba(176, 31, 104, 0.14), transparent 50%),
-    radial-gradient(ellipse 70% 50% at 80% 20%, rgba(75, 18, 72, 0.12), transparent 45%),
-    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(216, 74, 130, 0.08), transparent 50%),
-    linear-gradient(175deg, #2a0b28 0%, #3d1039 18%, #4b1248 40%, #3a1038 70%, #2a0b28 100%);
+    radial-gradient(ellipse 80% 50% at 30% 0%, rgba(201, 168, 76, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 75% 80%, rgba(107, 29, 58, 0.04), transparent 50%),
+    linear-gradient(180deg, #FDF8F3 0%, #F8F0E8 40%, #F3EBE2 70%, #EDE4DA 100%);
 }
 
-/* ── Decorative floating orbs ───────────────────────────── */
-.plan-page::before,
+/* ── Soft decorative glow ──────────────────────────────── */
+.plan-page::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
 .plan-page::after {
   content: '';
   position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(80px);
-  opacity: 0.35;
-}
-
-.plan-page::before {
   width: 500px;
   height: 500px;
-  top: -80px;
-  right: -120px;
-  background: radial-gradient(circle, rgba(216, 74, 130, 0.4), transparent 70%);
-}
-
-.plan-page::after {
-  width: 400px;
-  height: 400px;
-  bottom: -60px;
-  left: -100px;
-  background: radial-gradient(circle, rgba(201, 169, 110, 0.3), transparent 70%);
+  bottom: -150px;
+  left: -120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107, 29, 58, 0.05), transparent 70%);
+  pointer-events: none;
 }
 
 /* ── Page heading above the card ────────────────────────── */
@@ -66,64 +64,77 @@
   align-items: center;
   gap: 10px;
   margin: 0 0 14px;
-  color: rgba(255, 236, 214, 0.7);
+  color: #B8956A;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
   font-weight: 500;
 }
 
 .plan-eyebrow .ornament {
   font-size: 8px;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .plan-title {
   margin: 0;
-  color: #fff;
-  font-family: var(--font-cormorant), 'Josefin Sans', serif;
+  color: #3A1A2E;
+  font-family: var(--font-cormorant), 'Playfair Display', 'Josefin Sans', serif;
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 400;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .plan-title em {
-  color: #d84a82;
+  color: #b01f68;
   font-style: italic;
 }
 
 .plan-subtitle {
-  margin: 12px 0 0;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  margin: 14px auto 0;
+  color: #8C7B6D;
+  font-size: 0.95rem;
+  line-height: 1.65;
   max-width: 460px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 @keyframes planFadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 640px) {
   .plan-page {
-    padding: 88px 12px 60px;
+    padding: 72px 14px 60px;
   }
-
   .plan-hero {
     margin-bottom: 24px;
   }
-
   .plan-title {
     font-size: clamp(1.6rem, 7vw, 2.2rem);
   }
+}
+
+/* ── Floating Decorative Elements ─────────────────────── */
+.plan-deco {
+  position: absolute;
+  color: var(--gold, #B8956A);
+  opacity: 0.15;
+  font-size: 1.5rem;
+  z-index: 0;
+  pointer-events: none;
+  animation: floatDeco 12s ease-in-out infinite alternate;
+}
+
+.plan-deco-1 { top: 15%; left: 10%; animation-duration: 14s; font-size: 2rem; }
+.plan-deco-2 { top: 25%; right: 12%; animation-duration: 18s; opacity: 0.1; }
+.plan-deco-3 { bottom: 20%; left: 8%; animation-duration: 15s; font-size: 1.8rem; }
+.plan-deco-4 { top: 50%; right: 8%; animation-duration: 13s; }
+.plan-deco-5 { top: 5%; right: 40%; animation-duration: 20s; font-size: 1.2rem; opacity: 0.2; }
+
+@keyframes floatDeco {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(15px, -15px) rotate(10deg); }
+  100% { transform: translate(-10px, -25px) rotate(-5deg); }
 }
