@@ -16,14 +16,56 @@ class ContactController extends Controller
         $this->contactService = $contactService;
     }
 
+    public function index()
+    {
+        $contacts = $this->contactService->getAllContacts();
+        
+        return response()->json([
+            'message' => 'Contacts retrieved successfully',
+            'contacts' => $contacts
+        ], 200);
+    }
+
     public function store(StoreContactRequest $request)
     {
         $contact = $this->contactService->createContact($request->validated());
         
         return response()->json([
-            'message' => 'Message sent successfully',
+            'message' => 'Contact created successfully',
             'contact' => $contact
         ], 201);
+    }
+
+    public function show($id)
+    {
+        $contact = $this->contactService->getContactById($id);
+        
+        if (!$contact) {
+            return response()->json([
+                'message' => 'Contact not found'
+            ], 404);
+        }
+        
+        return response()->json([
+            'message' => 'Contact retrieved successfully',
+            'contact' => $contact
+        ], 200);
+    }
+
+    public function update(StoreContactRequest $request, $id)
+    {
+        $contact = $this->contactService->updateContact($id, $request->validated());
+        
+        if (!$contact) {
+            return response()->json([
+                'message' => 'Contact not found'
+            ], 404);
+        }
+        
+        return response()->json([
+            'message' => 'Contact updated successfully',
+            'contact' => $contact
+        ], 200);
     }
 
     public function delete($id)
@@ -32,12 +74,12 @@ class ContactController extends Controller
         
         if (!$result) {
             return response()->json([
-                'message' => 'Message not found'
+                'message' => 'Contact not found'
             ], 404);
         }
 
         return response()->json([
-            'message' => 'Message deleted successfully'
+            'message' => 'Contact deleted successfully'
         ], 200);
     }
 
@@ -49,22 +91,6 @@ class ContactController extends Controller
             return response()->json([
                 'message' => 'Contact already exists',
                 'contact' => $contact
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'Contact not found'
-            ], 404);
-        }
-    }
-
-    public function view($id)
-    {
-        $contacts = $this->contactService->getAllContactsByUserId($id);
-
-        if ($contacts->isNotEmpty()) {
-            return response()->json([
-                'message' => 'Contact found',
-                'contact' => $contacts
             ], 200);
         } else {
             return response()->json([

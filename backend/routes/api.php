@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Module Routes
-require base_path('app/Modules/Contact/Routes/api.php');
-require base_path('app/Modules/Lead/Routes/api.php');
-require base_path('app/Modules/Venue/Routes/api.php');
+// Load all module routes
+require base_path('app/Modules/Routes.php');
 
 // Auth Routes
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

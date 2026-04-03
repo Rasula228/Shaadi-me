@@ -6,19 +6,31 @@ use App\Modules\Contact\Models\Contact;
 
 class ContactService
 {
+    public function getAllContacts()
+    {
+        return Contact::all();
+    }
+
+    public function getContactById(int $id): ?Contact
+    {
+        return Contact::find($id);
+    }
+
     public function createContact(array $data): Contact
     {
         return Contact::create($data);
     }
 
-    public function getContactByUserId(int $userId): ?Contact
+    public function updateContact(int $id, array $data): ?Contact
     {
-        return Contact::where('user_id', $userId)->first();
-    }
-
-    public function getAllContactsByUserId(int $userId)
-    {
-        return Contact::where('user_id', $userId)->get();
+        $contact = Contact::find($id);
+        
+        if (!$contact) {
+            return null;
+        }
+        
+        $contact->update($data);
+        return $contact->fresh();
     }
 
     public function deleteContact(int $id): bool
@@ -33,13 +45,13 @@ class ContactService
         return true;
     }
 
-    public function getAllContacts()
+    public function getContactByUserId(int $userId): ?Contact
     {
-        return Contact::all();
+        return Contact::where('user_id', $userId)->first();
     }
 
-    public function getContactById(int $id): ?Contact
+    public function getAllContactsByUserId(int $userId)
     {
-        return Contact::find($id);
+        return Contact::where('user_id', $userId)->get();
     }
 }
