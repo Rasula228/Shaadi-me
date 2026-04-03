@@ -17,9 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(),
-<<<<<<< HEAD
-    providePrimeNG({ theme: { preset: Aura } })
-=======
     provideAnimationsAsync(),
     providePrimeNG({
       ripple: true,
@@ -27,6 +24,5 @@ export const appConfig: ApplicationConfig = {
         preset: Aura
       }
     })
->>>>>>> 6cc1b499a2c302651d6c62e4f328730c6eca8e19
   ]
 };

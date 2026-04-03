@@ -5,13 +5,6 @@ import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-footer',
-<<<<<<< HEAD
-  standalone: false,
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css'
-})
-export class FooterComponent { }
-=======
   standalone: true,
   imports: [CommonModule, DividerModule],
   templateUrl: './footer.component.html',
@@ -32,4 +25,3 @@ export class FooterComponent {
     this.plannerUi.open();
   }
 }
->>>>>>> 6cc1b499a2c302651d6c62e4f328730c6eca8e19
