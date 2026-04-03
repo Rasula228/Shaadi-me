@@ -1,21 +1,37 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { WeddingsComponent } from './pages/weddings/weddings.component';
-import { VenuesComponent } from './pages/venues/venues.component';
-import { ServicesComponent } from './pages/services/services.component';
-import { DestinationsComponent } from './pages/destinations/destinations.component';
-import { AboutComponent } from './pages/about/about.component';
-import { PressComponent } from './pages/press/press.component';
-import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'weddings', component: WeddingsComponent },
-  { path: 'venues', component: VenuesComponent },
-  { path: 'services', component: ServicesComponent },
-  { path: 'destinations', component: DestinationsComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'press', component: PressComponent },
-  { path: 'contact', component: ContactComponent },
+  { 
+    path: '', 
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) 
+  },
+  { 
+    path: 'weddings', 
+    loadChildren: () => import('./pages/weddings/weddings.module').then(m => m.WeddingsModule) 
+  },
+  { 
+    path: 'venues', 
+    loadChildren: () => import('./pages/venues/venues.module').then(m => m.VenuesModule) 
+  },
+  { 
+    path: 'services', 
+    loadChildren: () => import('./pages/services/services.module').then(m => m.ServicesModule) 
+  },
+  { 
+    path: 'destinations', 
+    loadChildren: () => import('./pages/destinations/destinations.module').then(m => m.DestinationsModule) 
+  },
+  { 
+    path: 'about', 
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) 
+  },
+  { 
+    path: 'press', 
+    loadChildren: () => import('./pages/press/press.module').then(m => m.PressModule) 
+  },
+  { 
+    path: 'contact', 
+    loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) 
+  },
   { path: '**', redirectTo: '' }
 ];
