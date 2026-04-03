@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IntakeFormComponent } from '../../components/intake-form/intake-form.component';
-import { PlannerUiService } from '../../services/planner-ui.service';
 import { HeroComponent } from '../../components/landing-page/hero/hero.component';
 import { CitiesComponent } from '../../components/landing-page/cities/cities.component';
 import { DecorComponent } from '../../components/landing-page/decor/decor.component';
@@ -19,21 +18,19 @@ import {
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-    IntakeFormComponent,
-    HeroComponent,
-    CitiesComponent,
-    DecorComponent,
-    ThemesComponent,
-    VenuesComponent,
-    FaqComponent
-  ],
+  standalone: false,
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  showForm = false;
+  openFaq: number | null = null;
+  destinations = [
+    { name: 'Bali', image: 'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=800' },
+    { name: 'Goa', image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=800' },
+    { name: 'Tuscany', image: 'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&q=80&w=800' }
+  ];
+
   heroSlides: HeroSlide[] = [
     { id: '01', label: 'Royal Grandeur', meta: 'Hyderabad • ShaadiMe Edit', video: '/landing-videos/landing-1.mp4' },
     { id: '02', label: 'Garden Wedding', meta: 'Bengaluru • Open Air', video: '/landing-videos/landing-2.mp4' },
@@ -82,5 +79,14 @@ export class HomeComponent {
     { q: 'Do you work with destination weddings?', a: 'Yes, destination-style celebrations are part of the worlds we can help shape, whether they are within India or in a getaway setting.' }
   ];
 
-  constructor(public readonly plannerUi: PlannerUiService) {}
+  constructor(private readonly router: Router) { }
+
+  goToPlan(): void {
+    this.router.navigate(['/plan']);
+  }
+
+  toggleFaq(index: number): void {
+    this.openFaq = this.openFaq === index ? null : index;
+  }
 }
+

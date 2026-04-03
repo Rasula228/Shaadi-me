@@ -5,22 +5,21 @@ import { PlannerUiService } from '../../services/planner-ui.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
+  standalone: false,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
   isMenuOpen = false;
   navItems = [
+    { label: 'Cities', href: '#cities' },
+    { label: 'Decor Styles', href: '#decoration' },
     { label: 'Themes', href: '#themes' },
     { label: 'Venues', href: '#venues' },
-    { label: 'Why ShaadiMe', href: '/about' },
-    { label: 'Cities', href: '#cities' },
     { label: 'FAQ', href: '#faq' }
   ];
 
-  constructor(private readonly plannerUi: PlannerUiService) {}
+  constructor(private readonly plannerUi: PlannerUiService) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

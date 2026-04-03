@@ -18,13 +18,16 @@
 }
 
 .footer-logo {
-  height: 3.25rem;
+  height: 4.2rem;
   width: auto;
+  margin-bottom: 1rem;
 }
 
 .footer-brand p {
-  max-width: 34rem;
-  color: rgba(255, 255, 255, 0.7);
+  max-width: 32rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .footer-grid {
@@ -50,10 +53,17 @@
 .footer-grid li,
 .footer-grid a {
   color: rgba(255, 255, 255, 0.74);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-grid a:hover {
+  color: white;
 }
 
 .footer-grid li + li {
-  margin-top: 0.7rem;
+  margin-top: 0.9rem;
 }
 
 .footer-socials {
@@ -66,6 +76,15 @@
   padding: 0.8rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-socials a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .footer-bottom {
@@ -84,12 +103,22 @@
   flex-wrap: wrap;
 }
 
+.footer-bottom a {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom a:hover {
+  color: white;
+}
+
 @media (min-width: 768px) {
   .footer-top,
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
   }
 
   .footer-grid {

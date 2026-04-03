@@ -1,0 +1,141 @@
+/* ════════════════════════════════════════════════════════
+   Plan Page — Warm, Inviting, Luxurious
+   "Wedding invitation on fine paper" aesthetic
+   60% warm cream · 30% champagne · 10% burgundy + gold
+   ════════════════════════════════════════════════════════ */
+
+:host {
+  display: block;
+}
+
+.plan-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 60px);
+  padding: 80px 20px 80px;
+  overflow: hidden;
+
+  /* Warm cream gradient — like sunlit linen */
+  background:
+    radial-gradient(ellipse 80% 50% at 30% 0%, rgba(201, 168, 76, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 75% 80%, rgba(107, 29, 58, 0.04), transparent 50%),
+    linear-gradient(180deg, #FDF8F3 0%, #F8F0E8 40%, #F3EBE2 70%, #EDE4DA 100%);
+}
+
+/* ── Soft decorative glow ──────────────────────────────── */
+.plan-page::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.plan-page::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107, 29, 58, 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Page heading above the card ────────────────────────── */
+.plan-hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 36px;
+  animation: planFadeDown 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.plan-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: #B8956A;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.plan-eyebrow .ornament {
+  font-size: 8px;
+  opacity: 0.6;
+}
+
+.plan-title {
+  margin: 0;
+  color: #3A1A2E;
+  font-family: var(--font-cormorant), 'Playfair Display', 'Josefin Sans', serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.plan-title em {
+  color: #d35a94;
+  font-style: italic;
+  display: inline-block;
+}
+
+.plan-subtitle {
+  margin: 14px auto 0;
+  color: #8C7B6D;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 460px;
+}
+
+@keyframes planFadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .plan-page {
+    padding: 72px 14px 60px;
+  }
+  .plan-hero {
+    margin-bottom: 24px;
+  }
+  .plan-title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+}
+
+/* ── Floating Decorative Elements ─────────────────────── */
+.plan-deco {
+  position: absolute;
+  color: var(--gold, #B8956A);
+  opacity: 0.15;
+  font-size: 1.5rem;
+  z-index: 0;
+  pointer-events: none;
+  animation: floatDeco 12s ease-in-out infinite alternate;
+}
+
+.plan-deco-1 { top: 15%; left: 10%; animation-duration: 14s; font-size: 2rem; }
+.plan-deco-2 { top: 25%; right: 12%; animation-duration: 18s; opacity: 0.1; }
+.plan-deco-3 { bottom: 20%; left: 8%; animation-duration: 15s; font-size: 1.8rem; }
+.plan-deco-4 { top: 50%; right: 8%; animation-duration: 13s; }
+.plan-deco-5 { top: 5%; right: 40%; animation-duration: 20s; font-size: 1.2rem; opacity: 0.2; }
+
+@keyframes floatDeco {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(15px, -15px) rotate(10deg); }
+  100% { transform: translate(-10px, -25px) rotate(-5deg); }
+}

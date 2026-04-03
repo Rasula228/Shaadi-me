@@ -5,7 +5,7 @@ import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact',
-  standalone: true,
+  standalone: false,
   imports: [CommonModule, FormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
@@ -30,7 +30,6 @@ export class ContactComponent {
         console.log('Contact submitted successfully:', response);
         this.isSubmitted = true;
         this.isLoading = false;
-        // Reset form
         this.contactForm = {
           name: '',
           email: '',
@@ -41,8 +40,8 @@ export class ContactComponent {
       error: (err) => {
         console.error('Error submitting contact:', err);
         this.isLoading = false;
-        // For demo purposes, still show success
         this.isSubmitted = true;
       }
     });
   }
+}
