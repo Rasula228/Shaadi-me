@@ -10,7 +10,23 @@ export class LeadService {
 
   constructor(private http: HttpClient) {}
 
+  getAllLeads(): Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+
+  getLeadById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
   submitLead(data: any): Observable<any> {
     return this.http.post(this.apiUrl, data);
+  }
+
+  updateLead(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
+  }
+
+  deleteLead(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
