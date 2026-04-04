@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PlannerUiService } from '../../services/planner-ui.service';
-import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-footer',

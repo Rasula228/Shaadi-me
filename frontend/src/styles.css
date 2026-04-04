@@ -23,6 +23,11 @@
   --landing-width: 78rem;
   --landing-radius: 2rem;
   --landing-shadow: 0 24px 60px rgba(75, 18, 72, 0.08);
+
+  /* Animation easings */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @theme {
@@ -450,4 +455,71 @@ p-toolbar {
   .landing-toolbar.p-toolbar {
     border-radius: 1.4rem;
   }
+}
+
+/* ─── Scroll-reveal animation system ─── */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal.is-visible {
+  animation: revealUp 0.7s var(--ease-out) forwards;
+}
+
+.reveal-d1.is-visible { animation-delay: 0ms; }
+.reveal-d2.is-visible { animation-delay: 80ms; }
+.reveal-d3.is-visible { animation-delay: 160ms; }
+.reveal-d4.is-visible { animation-delay: 240ms; }
+.reveal-d5.is-visible { animation-delay: 320ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal.is-visible {
+    animation: none;
+  }
+}
+
+/* ─── Gold shimmer utility ─── */
+.text-gold {
+  background: linear-gradient(135deg, #c9a84c 0%, #d4af37 40%, #e8c96a 60%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Ornamental section divider ─── */
+.section-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 0;
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  opacity: 0.5;
+}
+
+.section-ornament::before,
+.section-ornament::after {
+  content: '';
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }

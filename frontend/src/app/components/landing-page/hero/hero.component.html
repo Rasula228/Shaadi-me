@@ -15,29 +15,29 @@
       ></video>
     </ng-container>
     <div class="hero-media-overlay"></div>
+    <div class="hero-vignette"></div>
   </div>
 
   <div class="hero-content">
     <div class="hero-shell">
       <div class="hero-copy">
-        <p class="hero-eyebrow">✦ Wedding planning, handled with care</p>
-        <h1 class="hero-h1">
-          <span class="hero-h1-line">Craft a wedding</span>
+        <p class="hero-eyebrow hero-stagger hero-stagger-1">✦ Wedding planning, handled with care</p>
+        <h1 class="hero-h1 hero-stagger hero-stagger-2">
+          <span class="hero-h1-line">Craft a wedding worth</span>
           <span class="hero-h1-line">
-            worth
             <span class="accent">arriving for</span>
           </span>
         </h1>
-        <p class="hero-highlight">Plan your wedding in minutes</p>
-        <p class="hero-tagline hero-tagline-on-video">
+        <p class="hero-highlight hero-stagger hero-stagger-3">Plan your wedding in minutes</p>
+        <p class="hero-tagline hero-tagline-on-video hero-stagger hero-stagger-4">
           Tell us how you want the day to feel. We handle the planning,
           coordination, and follow-through so you can stay present for the
           moments that matter.
         </p>
 
-        <div class="hero-divider"></div>
+        <div class="hero-divider hero-stagger hero-stagger-5"></div>
 
-        <div class="hero-cta-simple">
+        <div class="hero-cta-simple hero-stagger hero-stagger-5">
           <button
             class="btn-primary hero-primary-cta"
             type="button"
@@ -54,36 +54,19 @@
             Explore themes
           </button>
         </div>
-        <div class="hero-trust">
-          <span>Bengaluru</span>
-          <span class="sep">·</span>
-          <span>Chennai</span>
-          <span class="sep">·</span>
-          <span>Hyderabad</span>
-        </div>
       </div>
     </div>
   </div>
 
-  <div class="hero-bottom-controls">
-    <div class="hero-pagination">
-      <button 
-        *ngFor="let slide of slides; let i = index" 
-        class="hero-dot" 
-        [class.is-active]="activeIndex === i"
-        (click)="selectSlide(i)"
-        [attr.aria-label]="'Go to slide ' + (i + 1)"
-      ></button>
+  <!-- Gold ticker -->
+  <div class="hero-ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span *ngFor="let _ of [1,2]" class="ticker-content">
+        <span *ngFor="let slide of slides">
+          <span class="ticker-dot">✦</span> {{ slide.meta }}
+        </span>
+        <span class="ticker-dot">✦</span> Coming Soon: Mumbai &amp; Delhi
+      </span>
     </div>
-
-    <button 
-      class="hero-scroll-btn" 
-      (click)="scrollToThemes()" 
-      aria-label="Scroll down to themes"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
   </div>
 </section>

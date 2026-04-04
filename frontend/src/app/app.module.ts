@@ -12,7 +12,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 // Pages
 import { HomeComponent } from './pages/home/home.component';
 import { WeddingsComponent } from './pages/weddings/weddings.component';
-import { VenuesComponent } from './pages/venues/venues.component';
+import { PageVenuesComponent } from './pages/venues/venues.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { DestinationsComponent } from './pages/destinations/destinations.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -32,6 +32,7 @@ import { CitiesComponent } from './components/landing-page/cities/cities.compone
 import { VenuesComponent as LandingVenuesComponent } from './components/landing-page/venues/venues.component';
 import { DecorComponent } from './components/landing-page/decor/decor.component';
 import { FaqComponent } from './components/landing-page/faq/faq.component';
+import { WhyShaadiMeComponent } from './components/landing-page/why-shaadime/why-shaadime.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { FaqComponent } from './components/landing-page/faq/faq.component';
     MainLayoutComponent,
     HomeComponent,
     WeddingsComponent,
-    VenuesComponent,
+    PageVenuesComponent,
     ServicesComponent,
     DestinationsComponent,
     AboutComponent,
@@ -54,7 +55,8 @@ import { FaqComponent } from './components/landing-page/faq/faq.component';
     CitiesComponent,
     LandingVenuesComponent,
     DecorComponent,
-    FaqComponent
+    FaqComponent,
+    WhyShaadiMeComponent
   ],
   imports: [
     BrowserModule,

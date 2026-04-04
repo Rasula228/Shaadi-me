@@ -1,33 +1,41 @@
-<section id="decoration" class="section">
+<section id="decor" class="section section-decor">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-label">✦ Decoration Styles</p>
-      <h2 class="section-title">
-        Decor that feels
-        <br />
-        thought through, not <em>thrown together</em>
-      </h2>
+      <div>
+        <p class="section-label">✦ Décor Styles</p>
+        <h2 class="section-title">
+          Set the mood before
+          <br />
+          a single guest <em>arrives</em>
+        </h2>
+      </div>
+
       <p class="section-sub">
-        Every detail should support the atmosphere you want to create, from the mandap to the last table setting.
+        From lush florals to minimal elegance, tell us the vibe you're going for and we'll bring a look that guests can feel the moment they walk in.
       </p>
     </div>
 
-    <div class="decor-grid">
-      <article *ngFor="let style of styles" class="decor-card" [class.decor-card-large]="style.large">
-        <div class="decor-photo">
-          <div class="decor-photo-inner">
-            <img
-              [src]="style.image"
-              [alt]="style.name"
-              [style.object-position]="style.objectPosition"
-              referrerpolicy="no-referrer"
-            />
-          </div>
-          <div class="decor-label">
-            <p class="decor-name">{{ style.name }}</p>
-          </div>
+    <div class="decor-shell">
+      <div class="decor-bento">
+      <article
+        *ngFor="let style of styles; let i = index"
+        class="decor-card"
+        [attr.data-card]="i"
+      >
+        <div class="decor-img-wrap">
+          <img
+            [src]="style.image"
+            [alt]="style.name"
+            referrerpolicy="no-referrer"
+          />
+        </div>
+        <div class="decor-overlay">
+          <span class="decor-index">0{{ i + 1 }}</span>
+          <span class="decor-overlay-name">{{ style.name }}</span>
+          <span class="decor-overlay-desc">{{ style.shortDescription }}</span>
         </div>
       </article>
+      </div>
     </div>
   </div>
 </section>

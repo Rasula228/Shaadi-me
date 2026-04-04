@@ -1,34 +1,48 @@
-<section id="themes" class="section section-soft">
+<section id="themes" class="section section-themes">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-label">✦ Wedding Themes</p>
-      <h2 class="section-title">
-        Not every wedding should
-        <br />
-        look the <em>same</em>
-      </h2>
-      <p class="section-sub">
-        A wedding should feel like you, not like a template. These are some of the worlds we can help you build.
+      <div class="section-heading-block">
+        <p class="section-label">✦ Theme Gallery</p>
+        <h2 class="section-title">
+          <span class="section-title-line">Choose a theme that</span>
+          <span class="section-title-line">feels like <em>you</em></span>
+        </h2>
+      </div>
+      <p class="section-sub section-copy">
+        Every wedding tells a story. Pick from curated themes or tell us your vision and we'll build around the emotion you want your guests to remember.
       </p>
     </div>
 
-    <div class="themes-grid">
-      <article *ngFor="let theme of themes; let i = index" class="theme-card" [class.theme-card-featured]="i === 0">
-        <div class="tc-photo">
+    <div class="themes-shell">
+      <div class="themes-grid">
+      <article
+        *ngFor="let theme of themes; let i = index"
+        class="theme-card"
+        [class.is-featured]="i === 0"
+        [attr.data-index]="i"
+      >
+        <div class="theme-img-wrap">
           <img
             [src]="theme.image"
             [alt]="theme.name"
-            [style.object-position]="theme.objectPosition"
             referrerpolicy="no-referrer"
           />
         </div>
-        <div class="tc-overlay"></div>
-        <span *ngIf="theme.featured" class="tc-pill" aria-label="Most loved" title="Most loved">❤</span>
-        <div class="tc-body">
-          <p class="tc-name">{{ theme.name }}</p>
-          <p class="tc-desc">{{ theme.description }}</p>
+        <div class="theme-gradient"></div>
+        <div class="theme-content">
+          <span class="theme-tag">{{ i === 0 ? 'Signature mood' : 'Curated theme' }}</span>
+          <span class="theme-price"
+            *ngIf="theme.priceRange">{{ theme.priceRange }}</span>
+          <h3 class="theme-name">{{ theme.name }}</h3>
+          <p class="theme-desc">{{ theme.description }}</p>
+        </div>
+        <div class="theme-hover-cta">
+          <span class="theme-explore">Explore theme →</span>
         </div>
       </article>
+      </div>
+
+      <p class="themes-note">We can blend references too, if your wedding sits between two moods.</p>
     </div>
   </div>
 </section>

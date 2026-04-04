@@ -1,6 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { PlannerUiService } from '../../services/planner-ui.service';
 
 @Component({

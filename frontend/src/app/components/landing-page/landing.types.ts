@@ -14,6 +14,7 @@ export interface CityCard {
 
 export interface DecorStyleCard {
   name: string;
+  shortDescription?: string;
   image: string;
   objectPosition: string;
   large?: boolean;
@@ -22,6 +23,8 @@ export interface DecorStyleCard {
 export interface ThemeCard {
   name: string;
   description: string;
+  shortDescription?: string;
+  priceRange?: string;
   image: string;
   objectPosition: string;
   featured?: boolean;
@@ -37,6 +40,8 @@ export interface VenueCard {
   name: string;
   description: string;
   tag: string;
+  city?: string;
+  capacity?: string;
   image: string;
   objectPosition: string;
 }

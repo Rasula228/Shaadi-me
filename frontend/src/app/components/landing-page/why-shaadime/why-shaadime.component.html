@@ -1,0 +1,32 @@
+<section id="why" class="why-section">
+  <div class="why-inner">
+    <div class="why-header">
+      <p class="why-label">✦ Why ShaadiMe</p>
+      <h2 class="why-title">A wedding partner,<br />not a vendor directory</h2>
+    </div>
+
+    <div class="why-stats-row">
+      <div *ngFor="let stat of stats" class="why-stat">
+        <span class="why-stat-number">{{ stat.number }}</span>
+        <span class="why-stat-label">{{ stat.label }}</span>
+      </div>
+    </div>
+
+    <div class="why-divider"></div>
+
+    <div class="why-points-grid">
+      <div *ngFor="let point of points" class="why-point-card">
+        <span class="why-point-icon">{{ point.icon }}</span>
+        <h3 class="why-point-title">{{ point.title }}</h3>
+        <p class="why-point-desc">{{ point.description }}</p>
+      </div>
+    </div>
+
+    <div class="why-divider"></div>
+
+    <blockquote class="why-quote">
+      <p>"We started ShaadiMe because we saw families spend months coordinating vendors, chasing timelines, and losing sleep over details that should've been joyful. Our goal is simple — take the chaos off your plate."</p>
+      <cite>— The ShaadiMe Founding Team</cite>
+    </blockquote>
+  </div>
+</section>

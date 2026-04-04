@@ -1,20 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app';
-import { LeadService } from './services/lead.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
-      providers: [
-        {
-          provide: LeadService,
-          useValue: {
-            submitLead: () => of({})
-          }
-        }
-      ]
+      declarations: [AppComponent],
+      imports: [RouterTestingModule]
     }).compileComponents();
   });
 
@@ -24,12 +16,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the shared shell', async () => {
+  it('should render the router outlet', async () => {
     const fixture = TestBed.createComponent(AppComponent);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-navbar')).toBeTruthy();
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
-    expect(compiled.querySelector('app-footer')).toBeTruthy();
   });
 });
