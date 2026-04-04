@@ -1,22 +1,71 @@
 <section class="plan-page">
-
-  <!-- Floating decorative elements -->
   <div class="plan-deco plan-deco-1" aria-hidden="true">✦</div>
   <div class="plan-deco plan-deco-2" aria-hidden="true">✦</div>
   <div class="plan-deco plan-deco-3" aria-hidden="true">❀</div>
   <div class="plan-deco plan-deco-4" aria-hidden="true">✦</div>
   <div class="plan-deco plan-deco-5" aria-hidden="true">❋</div>
 
-  <!-- Hero text above the form card -->
-  <div class="plan-hero">
-    <p class="plan-eyebrow">
-      <span class="ornament">✦</span>
-      ShaadiMe Planning Studio
-      <span class="ornament">✦</span>
-    </p>
-    <h1 class="plan-title">Tell us about your <em>celebration</em></h1>
-    <p class="plan-subtitle">Five simple steps to shape the wedding you've always imagined.<br>We'll take it from here.</p>
-  </div>
+  <div class="plan-shell">
+    <div class="plan-content">
+      <div class="plan-form-card">
+        <app-intake-form></app-intake-form>
+      </div>
+    </div>
 
-  <app-intake-form></app-intake-form>
+    <div class="plan-bottom-layout">
+      <div class="plan-hero plan-hero-bottom">
+        <p class="plan-eyebrow">
+          <span class="ornament">✦</span>
+          ShaadiMe Planning Studio
+          <span class="ornament">✦</span>
+        </p>
+        <h1 class="plan-title">Tell us about your <em>celebration</em></h1>
+        <p class="plan-subtitle">
+          Five simple steps to shape the wedding you've always imagined.
+          We'll take it from here.
+        </p>
+
+        <div class="plan-stage-strip" aria-label="Planning highlights">
+          <article class="plan-stage-card">
+            <span class="plan-stage-kicker">01</span>
+            <h2>Share the essentials</h2>
+            <p>Tell us about your ceremony, city, and guest list so we can anchor the brief.</p>
+          </article>
+          <article class="plan-stage-card">
+            <span class="plan-stage-kicker">02</span>
+            <h2>Shape the aesthetic</h2>
+            <p>Choose the mood, venue feel, and priorities that should guide your celebration.</p>
+          </article>
+          <article class="plan-stage-card">
+            <span class="plan-stage-kicker">03</span>
+            <h2>We match the right team</h2>
+            <p>Your planner uses this intake to build a tailored starting direction for you.</p>
+          </article>
+        </div>
+      </div>
+
+      <section class="plan-bento" aria-label="Planning details">
+        <div class="plan-aside-card plan-aside-card-primary">
+          <p class="plan-aside-label">What Happens Next</p>
+          <div class="plan-aside-divider" aria-hidden="true"></div>
+          <ul class="plan-aside-list">
+            <li>A planner reviews your intake and shortlists the right direction.</li>
+            <li>We get back to you within 24 hours with the next conversation.</li>
+            <li>Your details stay private and only help us personalize the experience.</li>
+          </ul>
+        </div>
+
+        <div class="plan-aside-card">
+          <p class="plan-aside-label">Designed For</p>
+          <div class="plan-pill-cloud">
+            <span>Destination weddings</span>
+            <span>Multi-event celebrations</span>
+            <span>South Indian traditions</span>
+            <span>Modern receptions</span>
+            <span>Family-first planning</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </section>
