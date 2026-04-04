@@ -10,19 +10,24 @@
 }
 
 .section {
-  padding: 96px 0;
+  padding: 108px 0;
 }
 
 .section-inner {
-  max-width: 1040px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 clamp(24px, 4vw, 48px);
 }
 
 .section-header {
-  margin: 0 auto 40px;
-  max-width: 720px;
-  text-align: center;
+  margin: 0 0 40px;
+  max-width: 44rem;
+}
+
+.cities-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .section-label {
@@ -51,88 +56,151 @@
 }
 
 .section-sub {
-  max-width: min(38rem, 94vw);
-  margin: 18px auto 0;
+  max-width: 39rem;
+  margin: 18px 0 0;
   color: var(--text-muted);
   font-family: var(--font-lora), sans-serif;
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   line-height: 1.8;
 }
 
-.cities-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 64px;
-  margin-top: 36px;
-}
-
-.city-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  transition: transform 0.3s ease;
-}
-
-.city-item:hover {
-  transform: translateY(-6px);
-}
-
-.city-orb {
+.cities-frame {
   position: relative;
-  width: 148px;
-  height: 148px;
+  padding: 24px;
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(circle at top left, rgba(216, 74, 130, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(252, 246, 247, 0.98));
+  border: 1px solid rgba(75, 18, 72, 0.08);
+  box-shadow:
+    0 26px 60px rgba(75, 18, 72, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.city-card {
+  position: relative;
   overflow: hidden;
-  border: 1px solid rgb(75 18 72 / 0.1);
-  border-radius: 50%;
-  box-shadow: 0 0 0 rgb(75 18 72 / 0);
+  border-radius: 24px;
+  min-height: 400px;
+  aspect-ratio: 0.82;
+  cursor: default;
+  box-shadow:
+    0 18px 42px rgba(75, 18, 72, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.28s var(--ease-out),
+    box-shadow 0.28s var(--ease-out);
 }
 
-.city-item:hover .city-orb {
-  border-color: rgb(75 18 72 / 0.3);
-  box-shadow: 0 8px 30px rgb(75 18 72 / 0.08);
+.city-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 24px 56px rgba(75, 18, 72, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.city-orb::before {
-  content: '';
+.city-photo {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 40% 40%, rgb(229 152 155 / 0.15) 0%, transparent 60%);
-  pointer-events: none;
 }
 
-.city-orb img {
+.city-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.95);
+  filter: brightness(0.92) saturate(1.06);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.city-card:hover .city-photo img {
+  transform: scale(1.05);
+}
+
+.city-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgb(34 14 33 / 0.82) 0%,
+      rgb(34 14 33 / 0.36) 30%,
+      rgb(34 14 33 / 0.06) 55%,
+      rgb(34 14 33 / 0.12) 100%
+    );
+  transition: background 0.4s ease;
+}
+
+.city-card:hover .city-overlay {
+  background:
+    linear-gradient(
+      to top,
+      rgb(34 14 33 / 0.88) 0%,
+      rgb(34 14 33 / 0.42) 30%,
+      rgb(34 14 33 / 0.08) 55%,
+      rgb(34 14 33 / 0.15) 100%
+    );
+}
+
+.city-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.city-index {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.city-tag-pill {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(201, 169, 110, 0.2);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  color: #e8c96a;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
 }
 
 .city-name {
   margin: 0;
-  color: var(--text-main);
+  color: var(--white);
   font-family: var(--font-cormorant), sans-serif;
-  font-size: 1.8rem;
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 20px rgb(12 4 12 / 0.5);
 }
 
-.city-tag {
+.city-copy {
+  max-width: 18rem;
   margin: 0;
-  color: var(--blush);
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 500;
+  color: rgba(255, 247, 249, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .cities-soon {
-  margin-top: 42px;
+  margin-top: 28px;
   text-align: center;
   color: var(--blush);
   font-family: var(--font-montserrat), sans-serif;
@@ -143,13 +211,65 @@
   opacity: 0.85;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
+  .section {
+    min-height: calc(100svh - 59px);
+    display: flex;
+    align-items: center;
+    padding: 72px 0;
+  }
+
+  .section-inner {
+    width: 100%;
+  }
+
+  .cities-frame {
+    padding: 20px;
+  }
+
+  .city-card {
+    min-height: 360px;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
   .section {
     padding: 80px 0;
   }
 
-  .cities-row {
-    gap: 36px;
+  .section-header {
+    max-width: none;
+  }
+
+  .cities-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .city-card {
+    min-height: 320px;
+    aspect-ratio: 0.9;
+    border-radius: 16px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .cities-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .city-card {
+    min-height: 280px;
+    aspect-ratio: 0.92;
+  }
+
+  .city-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 220px;
+    aspect-ratio: 1.7;
   }
 }
 
@@ -163,7 +283,7 @@
   }
 
   .section-header {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .section-title {
@@ -175,16 +295,27 @@
     line-height: 1.65;
   }
 
-  .cities-row {
-    gap: 26px;
+  .cities-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
-  .city-orb {
-    width: 122px;
-    height: 122px;
+  .city-card {
+    min-height: 240px;
+    aspect-ratio: 1.25;
+  }
+
+  .city-card:last-child {
+    grid-column: auto;
+    min-height: 240px;
+    aspect-ratio: 1.25;
   }
 
   .city-name {
-    font-size: 1.45rem;
+    font-size: 2rem;
+  }
+
+  .city-info {
+    padding: 22px;
   }
 }

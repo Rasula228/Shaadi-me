@@ -1,62 +1,72 @@
-/* ════════════════════════════════════════════════════════
-   Plan Page — Warm, Inviting, Luxurious
-   "Wedding invitation on fine paper" aesthetic
-   60% warm cream · 30% champagne · 10% burgundy + gold
-   ════════════════════════════════════════════════════════ */
-
 :host {
   display: block;
 }
 
 .plan-page {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: calc(100vh - 60px);
-  padding: 80px 20px 80px;
   overflow: hidden;
-
-  /* Warm cream gradient — like sunlit linen */
+  min-height: calc(100svh - 59px);
+  padding: calc(59px + 28px) 0 72px;
   background:
-    radial-gradient(ellipse 80% 50% at 30% 0%, rgba(201, 168, 76, 0.06), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 75% 80%, rgba(107, 29, 58, 0.04), transparent 50%),
-    linear-gradient(180deg, #FDF8F3 0%, #F8F0E8 40%, #F3EBE2 70%, #EDE4DA 100%);
+    radial-gradient(circle at top left, rgba(216, 74, 130, 0.12), transparent 26%),
+    radial-gradient(circle at top right, rgba(75, 18, 72, 0.1), transparent 24%),
+    linear-gradient(180deg, #fffdfd 0%, #fbf4f6 48%, #f7eef1 100%);
 }
 
-/* ── Soft decorative glow ──────────────────────────────── */
-.plan-page::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -200px;
-  right: -150px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 70%);
-  pointer-events: none;
-}
-
+.plan-page::before,
 .plan-page::after {
   content: '';
   position: absolute;
-  width: 500px;
-  height: 500px;
-  bottom: -150px;
-  left: -120px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(107, 29, 58, 0.05), transparent 70%);
+  border-radius: 999px;
   pointer-events: none;
 }
 
-/* ── Page heading above the card ────────────────────────── */
-.plan-hero {
+.plan-page::before {
+  top: -120px;
+  right: -120px;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(216, 74, 130, 0.12), transparent 72%);
+}
+
+.plan-page::after {
+  bottom: -160px;
+  left: -120px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(75, 18, 72, 0.08), transparent 72%);
+}
+
+.plan-shell {
   position: relative;
   z-index: 1;
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 36px);
+  display: grid;
+  gap: 28px;
+}
+
+.plan-hero {
+  max-width: 54rem;
+  margin: 0 auto 30px;
+  padding: 28px 28px 24px;
   text-align: center;
-  margin-bottom: 36px;
-  animation: planFadeDown 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+  border: 1px solid rgba(75, 18, 72, 0.08);
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(253, 248, 249, 0.98));
+  box-shadow:
+    0 24px 56px rgba(75, 18, 72, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  animation: planFadeDown 0.6s var(--ease-out) both;
+}
+
+.plan-hero-bottom {
+  max-width: none;
+  margin: 0;
+  height: 100%;
 }
 
 .plan-eyebrow {
@@ -64,78 +74,310 @@
   align-items: center;
   gap: 10px;
   margin: 0 0 14px;
-  color: #B8956A;
+  color: #d35a94;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--font-montserrat), sans-serif;
 }
 
 .plan-eyebrow .ornament {
   font-size: 8px;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 
 .plan-title {
   margin: 0;
-  color: #3A1A2E;
-  font-family: var(--font-cormorant), 'Playfair Display', 'Josefin Sans', serif;
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  color: var(--purple);
+  font-family: var(--font-cormorant), sans-serif;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
 }
 
 .plan-title em {
   color: #d35a94;
   font-style: italic;
-  display: inline-block;
 }
 
 .plan-subtitle {
-  margin: 14px auto 0;
-  color: #8C7B6D;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  max-width: 460px;
+  max-width: 42rem;
+  margin: 16px auto 0;
+  color: var(--text-muted);
+  font-family: var(--font-lora), sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
 }
 
-@keyframes planFadeDown {
-  from { opacity: 0; transform: translateY(-16px); }
-  to   { opacity: 1; transform: translateY(0); }
+.plan-stage-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+  text-align: left;
 }
 
-@media (max-width: 640px) {
-  .plan-page {
-    padding: 72px 14px 60px;
-  }
-  .plan-hero {
-    margin-bottom: 24px;
-  }
-  .plan-title {
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
-  }
+.plan-stage-card {
+  position: relative;
+  min-height: 100%;
+  padding: 18px 18px 16px;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(75, 18, 72, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(251, 243, 246, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 16px 34px rgba(75, 18, 72, 0.05);
 }
 
-/* ── Floating Decorative Elements ─────────────────────── */
+.plan-stage-kicker,
+.plan-aside-label {
+  display: inline-block;
+  color: #b01f68;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.plan-stage-card h2 {
+  margin: 12px 0 8px;
+  color: var(--purple);
+  font-family: var(--font-cormorant), sans-serif;
+  font-size: 1.45rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.plan-stage-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-lora), sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.plan-content {
+  display: block;
+}
+
+.plan-aside-card {
+  position: relative;
+  padding: 22px;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(75, 18, 72, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(252, 246, 247, 0.98));
+  box-shadow:
+    0 20px 46px rgba(75, 18, 72, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+.plan-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-content: start;
+}
+
+.plan-bottom-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 360px);
+  gap: 22px;
+  align-items: start;
+  margin-top: 4px;
+}
+
+.plan-aside-card-primary {
+  background:
+    radial-gradient(circle at top right, rgba(216, 74, 130, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(250, 241, 244, 0.98));
+}
+
+.plan-aside-divider {
+  width: 54px;
+  height: 1px;
+  margin: 14px 0 18px;
+  background: linear-gradient(90deg, rgba(201, 169, 110, 0), rgba(201, 169, 110, 0.85), rgba(201, 169, 110, 0));
+}
+
+.plan-aside-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.plan-aside-list li,
+.plan-pill-cloud span {
+  color: var(--text-muted);
+  font-family: var(--font-lora), sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.plan-aside-list li {
+  padding-left: 18px;
+  position: relative;
+}
+
+.plan-aside-list li::before {
+  content: '';
+  position: absolute;
+  top: 0.72rem;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c9a96e, #d35a94);
+  box-shadow: 0 0 0 4px rgba(216, 74, 130, 0.08);
+}
+
+.plan-pill-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.plan-pill-cloud span {
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(75, 18, 72, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.plan-form-card {
+  position: relative;
+}
+
+.plan-form-card app-intake-form {
+  display: block;
+  margin: 0 auto;
+}
+
 .plan-deco {
   position: absolute;
-  color: var(--gold, #B8956A);
-  opacity: 0.15;
+  color: var(--gold, #b8956a);
+  opacity: 0.12;
   font-size: 1.5rem;
   z-index: 0;
   pointer-events: none;
   animation: floatDeco 12s ease-in-out infinite alternate;
 }
 
-.plan-deco-1 { top: 15%; left: 10%; animation-duration: 14s; font-size: 2rem; }
-.plan-deco-2 { top: 25%; right: 12%; animation-duration: 18s; opacity: 0.1; }
-.plan-deco-3 { bottom: 20%; left: 8%; animation-duration: 15s; font-size: 1.8rem; }
-.plan-deco-4 { top: 50%; right: 8%; animation-duration: 13s; }
-.plan-deco-5 { top: 5%; right: 40%; animation-duration: 20s; font-size: 1.2rem; opacity: 0.2; }
+.plan-deco-1 { top: 12%; left: 8%; animation-duration: 14s; font-size: 1.9rem; }
+.plan-deco-2 { top: 22%; right: 10%; animation-duration: 18s; opacity: 0.08; }
+.plan-deco-3 { bottom: 18%; left: 10%; animation-duration: 15s; font-size: 1.7rem; }
+.plan-deco-4 { top: 56%; right: 8%; animation-duration: 13s; }
+.plan-deco-5 { top: 8%; right: 38%; animation-duration: 20s; font-size: 1.1rem; opacity: 0.16; }
+
+@keyframes planFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @keyframes floatDeco {
   0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(15px, -15px) rotate(10deg); }
-  100% { transform: translate(-10px, -25px) rotate(-5deg); }
+  50% { transform: translate(14px, -14px) rotate(10deg); }
+  100% { transform: translate(-10px, -24px) rotate(-5deg); }
+}
+
+@media (min-width: 1024px) {
+  .plan-page {
+    padding: calc(59px + 34px) 0 84px;
+  }
+
+  .plan-shell {
+    gap: 32px;
+  }
+
+  .plan-hero {
+    padding: 34px 36px 28px;
+  }
+
+  .plan-bottom-layout {
+    gap: 24px;
+  }
+
+}
+
+@media (max-width: 960px) {
+  .plan-page {
+    padding: calc(59px + 20px) 0 72px;
+  }
+
+  .plan-shell {
+    gap: 22px;
+  }
+
+  .plan-stage-strip,
+  .plan-bottom-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-bento {
+    margin-top: 0;
+    gap: 14px;
+  }
+
+  .plan-hero {
+    margin-bottom: 20px;
+    padding: 24px 22px 22px;
+  }
+
+  .plan-bottom-layout {
+    margin-top: 0;
+    gap: 18px;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .plan-page {
+    padding: calc(54px + 16px) 0 60px;
+  }
+
+  .plan-shell {
+    gap: 18px;
+    padding: 0 14px;
+  }
+
+  .plan-stage-strip,
+  .plan-bottom-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-hero {
+    padding: 20px 18px 18px;
+    border-radius: 1.35rem;
+  }
+
+  .plan-aside-card {
+    padding: 18px;
+    border-radius: 1.35rem;
+  }
+
+  .plan-title {
+    font-size: clamp(2rem, 10vw, 2.6rem);
+  }
+
+  .plan-subtitle {
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
 }

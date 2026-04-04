@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { WeddingsComponent } from './pages/weddings/weddings.component';
-import { VenuesComponent } from './pages/venues/venues.component';
+import { PageVenuesComponent } from './pages/venues/venues.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { DestinationsComponent } from './pages/destinations/destinations.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'weddings', component: WeddingsComponent },
-      { path: 'venues', component: VenuesComponent },
+      { path: 'venues', component: PageVenuesComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'destinations', component: DestinationsComponent },
       { path: 'about', component: AboutComponent },

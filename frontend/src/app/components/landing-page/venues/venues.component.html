@@ -1,33 +1,39 @@
-<section id="venues" class="section section-muted">
+<section id="venues" class="section section-venues">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-label">✦ Types of Venues</p>
-      <h2 class="section-title">
-        The right venue changes
-        <br />
-        the whole <em>mood</em>
-      </h2>
+      <div>
+        <p class="section-label">✦ Venue Partners</p>
+        <h2 class="section-title">
+          A venue that sets the
+          <br />
+          <em>stage</em> for everything
+        </h2>
+      </div>
       <p class="section-sub">
-        From heritage properties to polished hotel ballrooms, the setting shapes the entire experience of the day.
+        Hand-picked venues that match your style, budget, and guest count. Each one is vetted by our team for quality, reliability, and a little magic.
       </p>
     </div>
 
-    <div class="venues-scroll" role="list">
-      <article *ngFor="let venue of venues" class="venue-card">
-        <div class="venue-photo">
-          <img
-            [src]="venue.image"
-            [alt]="venue.name"
-            [style.object-position]="venue.objectPosition"
-            referrerpolicy="no-referrer"
-          />
-        </div>
-        <div class="venue-info">
-          <span class="venue-kicker">{{ venue.tag }}</span>
-          <p class="venue-name">{{ venue.name }}</p>
-          <p class="venue-desc">{{ venue.description }}</p>
-        </div>
-      </article>
+    <div class="venues-shell">
+      <div class="venues-grid">
+        <article *ngFor="let venue of venues; let i = index" class="venue-card" [attr.data-index]="i">
+          <div class="venue-img-wrap">
+            <img
+              [src]="venue.image"
+              [alt]="venue.name"
+              referrerpolicy="no-referrer"
+            />
+          </div>
+          <div class="venue-gradient"></div>
+          <div class="venue-info">
+            <span class="venue-tag" *ngIf="venue.tag">{{ venue.tag }}</span>
+            <span class="venue-location" *ngIf="venue.city">{{ venue.city }}</span>
+            <h3 class="venue-name">{{ venue.name }}</h3>
+            <p class="venue-description" *ngIf="venue.description">{{ venue.description }}</p>
+            <span class="venue-capacity" *ngIf="venue.capacity">Up to {{ venue.capacity }} guests</span>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>

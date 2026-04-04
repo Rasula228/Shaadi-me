@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-page-venues',
@@ -7,4 +6,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './venues.component.html',
   styleUrl: './venues.component.css'
 })
-export class VenuesComponent {}
+export class PageVenuesComponent {}

@@ -25,6 +25,30 @@
 
 <!-- ─── FORM CARD ─── -->
 <div *ngIf="!submitted" class="pf-card">
+  <div class="pf-topbar">
+    <div class="pf-topbar-copy">
+      <p class="pf-topbar-label">Guided Intake</p>
+      <h2 class="pf-topbar-title">{{ stepLabels[step].label }}</h2>
+      <p class="pf-topbar-text">A short, editorial-style brief so our planner starts with the right context.</p>
+    </div>
+
+    <div class="pf-progress-panel" aria-label="Form progress">
+      <div class="pf-progress-meta">
+        <span>Step {{ step + 1 }}</span>
+        <span>{{ TOTAL_STEPS }}</span>
+      </div>
+      <div class="pf-progress-track" aria-hidden="true">
+        <span class="pf-progress-fill" [style.width.%]="((step + 1) / TOTAL_STEPS) * 100"></span>
+      </div>
+      <div class="pf-progress-dots">
+        <span
+          *ngFor="let item of stepLabels; let i = index"
+          class="pf-progress-dot"
+          [class.is-active]="i <= step">
+        </span>
+      </div>
+    </div>
+  </div>
 
   <!-- Body -->
   <div class="pf-body" [ngSwitch]="step">
