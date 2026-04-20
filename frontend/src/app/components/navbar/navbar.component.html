@@ -8,14 +8,15 @@
       </a>
 
       <div class="nav-links" aria-label="Primary">
-        <a *ngFor="let item of navItems" [href]="item.href" (click)="closeMenu()">{{ item.label }}</a>
+        <a *ngFor="let item of navItems" routerLink="/" [fragment]="item.fragment" (click)="closeMenu()">{{ item.label }}</a>
       </div>
 
       <div class="nav-right">
         <button
           type="button"
           class="btn-primary cta-primary nav-cta"
-          (click)="openPlanner()"
+          routerLink="/plan"
+          (click)="closeMenu()"
         >
           Start Planning →
         </button>
@@ -35,11 +36,12 @@
   </div>
 
   <div *ngIf="isMenuOpen" class="mobile-menu">
-    <a *ngFor="let item of navItems" [href]="item.href" (click)="closeMenu()">{{ item.label }}</a>
+    <a *ngFor="let item of navItems" routerLink="/" [fragment]="item.fragment" (click)="closeMenu()">{{ item.label }}</a>
     <button
       type="button"
       class="btn-primary cta-primary landing-btn-mobile"
-      (click)="openPlanner()"
+      routerLink="/plan"
+      (click)="closeMenu()"
     >
       Start Planning
     </button>

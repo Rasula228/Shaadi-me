@@ -80,14 +80,20 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
     this.videoElements.forEach((videoRef, index) => {
       const video = videoRef.nativeElement;
+      
+      // Ensure all standard attributes are set
       video.muted = true;
       video.defaultMuted = true;
-      video.volume = 0;
       video.playsInline = true;
-      video.preload = 'auto';
 
       if (index === this.activeIndex) {
-        this.playVideo(video);
+        // Simply attempt to play the active video. The browser handles buffering automatically.
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay might be blocked or loading, ignore the error
+          });
+        }
       } else {
         video.pause();
       }
@@ -103,25 +109,5 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       this.syncVideos();
       this.syncFrame = undefined;
     });
-  }
-
-  private playVideo(video: HTMLVideoElement) {
-    if (!video.currentSrc) {
-      return;
-    }
-
-    if (video.readyState === 0) {
-      const handleLoadedData = () => {
-        video.currentTime = 0;
-        void video.play().catch(() => undefined);
-      };
-
-      video.addEventListener('loadeddata', handleLoadedData, { once: true });
-      video.load();
-      return;
-    }
-
-    video.currentTime = 0;
-    void video.play().catch(() => undefined);
   }
 }

@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { PlannerUiService } from '../../services/planner-ui.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +9,12 @@ import { PlannerUiService } from '../../services/planner-ui.service';
 export class NavbarComponent {
   isMenuOpen = false;
   navItems = [
-    { label: 'Cities', href: '#cities' },
-    { label: 'Decor Styles', href: '#decoration' },
-    { label: 'Themes', href: '#themes' },
-    { label: 'Venues', href: '#venues' },
-    { label: 'FAQ', href: '#faq' }
+    { label: 'Cities', fragment: 'cities' },
+    { label: 'Decor Styles', fragment: 'decor' },
+    { label: 'Themes', fragment: 'themes' },
+    { label: 'Venues', fragment: 'venues' },
+    { label: 'FAQ', fragment: 'faq' }
   ];
-
-  constructor(private readonly plannerUi: PlannerUiService) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -25,10 +22,5 @@ export class NavbarComponent {
 
   closeMenu() {
     this.isMenuOpen = false;
-  }
-
-  openPlanner() {
-    this.plannerUi.open();
-    this.closeMenu();
   }
 }
