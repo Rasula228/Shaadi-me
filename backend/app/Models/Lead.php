@@ -10,14 +10,26 @@ class Lead extends Model
     use HasFactory;
 
     protected $fillable = [
-        'bride_name',
-        'groom_name',
+        'p1name',
+        'p2name',
+        'email',
         'phone',
-        'wedding_date',
-        'budget',
-        'wedding_type',
-        'guest_count',
-        'planning_preference',
+        'community',
         'city',
+        'wedding_date',
+        'guests',
+        'venue_type',
+        'budget',
+        'styles',
+        'services',
+        'events',
+        'notes',
+        'referral',
+    ];
+
+    protected $casts = [
+        'styles' => 'array',
+        'services' => 'array',
+        'events' => 'array',
     ];
 }

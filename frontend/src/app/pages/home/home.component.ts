@@ -66,11 +66,11 @@ export class HomeComponent {
   ];
 
   faqs: FaqItem[] = [
-    { q: 'What does ShaadiMe actually do? Is it a vendor marketplace or a planning service?', a: 'ShaadiMe is a planning partner, not a vendor marketplace. We understand your wedding, assign a planner, coordinate the work, and guide the process end to end.' },
+    { q: 'What does ShaadiMe actually do?', a: 'ShaadiMe is a planning partner, not a vendor marketplace. We understand your wedding, assign a planner, coordinate the work, and guide the process end to end.' },
     { q: 'How much does it cost to plan with ShaadiMe?', a: 'The final cost depends on the scale, city, and complexity of your wedding. Once we understand what you are planning, we walk you through a transparent recommendation instead of pushing a generic package.' },
     { q: 'Which cities is ShaadiMe available in right now?', a: 'ShaadiMe is currently serving Hyderabad, Bengaluru, and Chennai. These are our launch cities, and we will expand from here.' },
     { q: 'How early should I get in touch before my wedding?', a: 'Earlier is always better, especially for larger celebrations. Six months gives enough room to plan calmly, but if your timeline is shorter we can still tell you what is realistic.' },
-    { q: 'Can you help if we only need part of the wedding planned?', a: 'Yes. We can support full planning or only the parts where you want extra help, like venue selection, decor, logistics, or guest coordination.' },
+    { q: 'Do you offer partial planning services?', a: 'Yes. We offer both full-service planning and modular support. If you only need expertise for specific aspects—like venue selection, decor, or guest management—we can tailor our involvement to your exact needs.' },
     { q: 'Will one person be handling our wedding?', a: 'You will have one primary planner who keeps the context, coordinates the moving pieces, and stays your main point of contact.' },
     { q: 'Can we share inspiration photos and references?', a: 'Absolutely. We use inspiration to understand the mood you want and then turn that into a practical plan that fits your city, budget, and guest count.' },
     { q: 'Do you work with destination weddings?', a: 'Yes, destination-style celebrations are part of the worlds we can help shape, whether they are within India or in a getaway setting.' }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LeadService } from '../../services/lead.service';
 
 // ─────────────────────────────────────────────
 // Types
@@ -249,6 +250,8 @@ export class IntakeFormComponent {
   readonly referralOptions = REFERRAL_OPTIONS;
   readonly stepLabels = STEP_LABELS;
 
+  constructor(private leadService: LeadService) {}
+
   step = 0;
   submitted = false;
 
@@ -413,6 +416,13 @@ export class IntakeFormComponent {
     };
 
     console.log('[ShaadiMe] Intake submission:', payload);
-    this.submitted = true;
+    this.leadService.submitLead(payload).subscribe({
+      next: () => {
+        this.submitted = true;
+      },
+      error: (err) => {
+        console.error('Failed to submit lead', err);
+      }
+    });
   }
 }
