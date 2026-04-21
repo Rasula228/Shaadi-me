@@ -1,27 +1,79 @@
 <!-- ─── SUCCESS STATE ─── -->
 <div *ngIf="submitted" class="pf-success">
+  <!-- Decorative floating elements -->
+  <div class="pf-success-deco pf-success-deco-1" aria-hidden="true">✦</div>
+  <div class="pf-success-deco pf-success-deco-2" aria-hidden="true">❀</div>
+  <div class="pf-success-deco pf-success-deco-3" aria-hidden="true">✦</div>
+
   <div class="pf-success-card">
+    <!-- Animated check icon -->
     <div class="pf-success-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-        <polyline points="22 4 12 14.01 9 11.01"/>
+      <div class="pf-success-icon-ring"></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
       </svg>
     </div>
-    <h2 class="pf-success-title">We Received Your Details</h2>
-    <p class="pf-success-msg">
-      Thank you, <strong>{{ form.p1name || 'there' }}</strong>.
-      Our team will reach out within 24 hours to begin shaping your celebration.
+
+    <p class="pf-success-eyebrow">
+      <span class="ornament">✦</span>
+      Submission Received
+      <span class="ornament">✦</span>
     </p>
+
+    <h2 class="pf-success-title">
+      Thank you, <em>{{ form.p1name || 'there' }}</em>
+    </h2>
+
+    <p class="pf-success-msg">
+      We've received everything we need to get started. A dedicated ShaadiMe planner
+      will review your details and reach out to you <strong>within 24 hours</strong>
+      to begin shaping your celebration.
+    </p>
+
     <div class="pf-success-divider"></div>
+
+    <!-- Summary card -->
     <div class="pf-success-summary">
-      <div class="pf-summ-row" *ngFor="let r of reviewRows">
+      <p class="pf-success-summary-title">Your Brief</p>
+      <div class="pf-summ-row" *ngFor="let r of reviewRows; let i = index"
+           [style.animation-delay.ms]="i * 60">
         <span class="pf-summ-label">{{ r.label }}</span>
         <span class="pf-summ-value">{{ r.value }}</span>
       </div>
     </div>
-    <a routerLink="/" class="pf-success-btn">Back to Home</a>
+
+    <!-- What happens next -->
+    <div class="pf-success-next">
+      <div class="pf-success-next-item">
+        <span class="pf-success-next-num">01</span>
+        <span>Planner reviews your brief</span>
+      </div>
+      <div class="pf-success-next-dot" aria-hidden="true"></div>
+      <div class="pf-success-next-item">
+        <span class="pf-success-next-num">02</span>
+        <span>We reach out within 24 hrs</span>
+      </div>
+      <div class="pf-success-next-dot" aria-hidden="true"></div>
+      <div class="pf-success-next-item">
+        <span class="pf-success-next-num">03</span>
+        <span>Your journey begins</span>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="pf-success-actions">
+      <a routerLink="/" class="pf-success-btn pf-success-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Back to Home
+      </a>
+      <a routerLink="/contact" class="pf-success-btn pf-success-btn-secondary">
+        Contact Us
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
   </div>
 </div>
+
 
 <!-- ─── FORM CARD ─── -->
 <div *ngIf="!submitted" class="pf-card">
@@ -60,12 +112,20 @@
         <div class="pf-field">
           <label class="pf-label" for="p1name">Bride</label>
           <input id="p1name" class="pf-input" type="text" placeholder="e.g. Priya"
+                 [class.pf-input-error]="hasTouched('p1name') && hasError('p1name')"
                  [(ngModel)]="form.p1name" />
+          <span *ngIf="hasTouched('p1name') && stepErrors['p1name']" class="pf-field-error">
+            {{ stepErrors['p1name'] }}
+          </span>
         </div>
         <div class="pf-field">
           <label class="pf-label" for="p2name">Groom</label>
           <input id="p2name" class="pf-input" type="text" placeholder="e.g. Arjun"
+                 [class.pf-input-error]="hasTouched('p2name') && hasError('p2name')"
                  [(ngModel)]="form.p2name" />
+          <span *ngIf="hasTouched('p2name') && stepErrors['p2name']" class="pf-field-error">
+            {{ stepErrors['p2name'] }}
+          </span>
         </div>
       </div>
 
@@ -73,13 +133,21 @@
         <div class="pf-field anim-delay-1">
           <label class="pf-label" for="email">Email</label>
           <input id="email" class="pf-input" type="email" placeholder="you@example.com"
+                 [class.pf-input-error]="hasTouched('email') && hasError('email')"
                  [(ngModel)]="form.email" />
+          <span *ngIf="hasTouched('email') && stepErrors['email']" class="pf-field-error">
+            {{ stepErrors['email'] }}
+          </span>
         </div>
 
         <div class="pf-field anim-delay-2">
           <label class="pf-label" for="phone">Phone</label>
           <input id="phone" class="pf-input" type="tel" placeholder="+91 98765 43210"
+                 [class.pf-input-error]="hasTouched('phone') && hasError('phone')"
                  [(ngModel)]="form.phone" />
+          <span *ngIf="hasTouched('phone') && stepErrors['phone']" class="pf-field-error">
+            {{ stepErrors['phone'] }}
+          </span>
         </div>
       </div>
 
@@ -90,11 +158,14 @@
             *ngFor="let c of communities"
             class="pf-pill"
             [class.active]="form.community === c"
-            (click)="form.community = c; onCommunityChange()"
+            (click)="form.community = c; onCommunityChange(); clearError('community')"
             type="button">
             {{ c }}
           </button>
         </div>
+        <span *ngIf="hasTouched('community') && stepErrors['community']" class="pf-field-error">
+          {{ stepErrors['community'] }}
+        </span>
       </div>
 
       <!-- Events preview when community selected -->
@@ -117,11 +188,14 @@
             *ngFor="let city of planningCities"
             class="pf-pill"
             [class.active]="form.city === city"
-            (click)="form.city = city"
+            (click)="form.city = city; clearError('city')"
             type="button">
             {{ city }}
           </button>
         </div>
+        <span *ngIf="hasTouched('city') && stepErrors['city']" class="pf-field-error">
+          {{ stepErrors['city'] }}
+        </span>
       </div>
     </div>
 
@@ -133,23 +207,37 @@
           <label class="pf-label" for="wdate">Wedding Date</label>
           <input id="wdate" class="pf-input" type="date" [min]="minDate"
                  [class.is-placeholder]="!form.weddingDate"
+                 [class.pf-input-error]="hasTouched('weddingDate') && hasError('weddingDate')"
                  [(ngModel)]="form.weddingDate" />
+          <span *ngIf="hasTouched('weddingDate') && stepErrors['weddingDate']" class="pf-field-error">
+            {{ stepErrors['weddingDate'] }}
+          </span>
         </div>
         <div class="pf-field">
           <label class="pf-label">Guest Count</label>
-          <select class="pf-input" [(ngModel)]="form.guests" [class.is-placeholder]="!form.guests">
+          <select class="pf-input" [(ngModel)]="form.guests"
+                  [class.is-placeholder]="!form.guests"
+                  [class.pf-input-error]="hasTouched('guests') && hasError('guests')">
             <option value="">Select range</option>
             <option *ngFor="let g of guestOptions" [value]="g">{{ g }}</option>
           </select>
+          <span *ngIf="hasTouched('guests') && stepErrors['guests']" class="pf-field-error">
+            {{ stepErrors['guests'] }}
+          </span>
         </div>
       </div>
 
       <div class="pf-field">
         <label class="pf-label">Venue Preference</label>
-        <select class="pf-input" [(ngModel)]="form.venueType" [class.is-placeholder]="!form.venueType">
+        <select class="pf-input" [(ngModel)]="form.venueType"
+                [class.is-placeholder]="!form.venueType"
+                [class.pf-input-error]="hasTouched('venueType') && hasError('venueType')">
           <option value="">Select venue type</option>
           <option *ngFor="let v of venueOptions" [value]="v">{{ v }}</option>
         </select>
+        <span *ngIf="hasTouched('venueType') && stepErrors['venueType']" class="pf-field-error">
+          {{ stepErrors['venueType'] }}
+        </span>
       </div>
 
       <!-- Budget slider -->
@@ -209,7 +297,7 @@
           *ngFor="let s of styleOptions"
           class="pf-style-card"
           [class.selected]="hasStyle(s.name)"
-          (click)="toggleStyle(s.name)"
+          (click)="toggleStyle(s.name); clearError('styles')"
           type="button">
           <img [src]="s.image" [alt]="s.name" class="pf-style-img" loading="lazy" />
           <div class="pf-style-overlay">
@@ -218,6 +306,9 @@
           <span *ngIf="hasStyle(s.name)" class="pf-style-check">✓</span>
         </button>
       </div>
+      <span *ngIf="hasTouched('styles') && stepErrors['styles']" class="pf-field-error pf-field-error-block">
+        {{ stepErrors['styles'] }}
+      </span>
     </div>
 
     <!-- ══════ STEP 3 — Priorities ══════ -->
@@ -228,11 +319,14 @@
           *ngFor="let svc of serviceOptions"
           class="pf-service-pill"
           [class.active]="hasService(svc)"
-          (click)="toggleService(svc)"
+          (click)="toggleService(svc); clearError('services')"
           type="button">
           {{ svc }}
         </button>
       </div>
+      <span *ngIf="hasTouched('services') && stepErrors['services']" class="pf-field-error pf-field-error-block">
+        {{ stepErrors['services'] }}
+      </span>
 
       <div class="pf-field" style="margin-top: 24px;">
         <label class="pf-label" for="notes">Anything else we should know?</label>
@@ -271,6 +365,11 @@
       </div>
 
       <p class="pf-privacy">By submitting, you agree to let ShaadiMe use this information to contact you about wedding planning services. We keep your data private.</p>
+
+      <div *ngIf="errorMsg" class="pf-error-alert" role="alert">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>{{ errorMsg }}</span>
+      </div>
     </div>
   </div>
 
@@ -284,9 +383,14 @@
 
     <span class="pf-step-counter">{{ step + 1 }} / {{ TOTAL_STEPS }}</span>
 
-    <button class="pf-next-btn" (click)="nextStep()" type="button">
-      {{ step === TOTAL_STEPS - 1 ? 'Submit' : 'Continue' }}
-      <svg *ngIf="step < TOTAL_STEPS - 1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    <button class="pf-next-btn" (click)="nextStep()" type="button" [disabled]="submitting">
+      <ng-container *ngIf="!submitting">
+        {{ step === TOTAL_STEPS - 1 ? 'Submit' : 'Continue' }}
+        <svg *ngIf="step < TOTAL_STEPS - 1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </ng-container>
+      <ng-container *ngIf="submitting">
+        Shaping...
+      </ng-container>
     </button>
   </div>
 </div>

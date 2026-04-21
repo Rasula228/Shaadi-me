@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { LeadService } from '../../services/lead.service';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 // ─────────────────────────────────────────────
 // Types
@@ -250,10 +251,19 @@ export class IntakeFormComponent {
   readonly referralOptions = REFERRAL_OPTIONS;
   readonly stepLabels = STEP_LABELS;
 
-  constructor(private leadService: LeadService) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   step = 0;
   submitted = false;
+  submitting = false;
+  errorMsg: string | null = null;
+
+  // ─── Validation state ──────────────────────
+  stepErrors: Record<string, string> = {};
+  touched: Set<string> = new Set();
 
   form: FormState = {
     p1name: '',
@@ -326,6 +336,104 @@ export class IntakeFormComponent {
       : 'TBD';
   }
 
+  // ─── Validation ────────────────────────────
+
+  private readonly EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  private readonly PHONE_RE = /^[+]?[\d\s\-()]{7,15}$/;
+
+  markTouched(field: string): void {
+    this.touched.add(field);
+    this.validateStep(this.step);
+  }
+
+  hasTouched(field: string): boolean {
+    return this.touched.has(field);
+  }
+
+  hasError(field: string): boolean {
+    return !!this.stepErrors[field];
+  }
+
+  clearError(field: string): void {
+    delete this.stepErrors[field];
+  }
+
+  validateStep(step: number): boolean {
+    this.stepErrors = {};
+
+    switch (step) {
+      case 0:
+        if (!this.form.p1name.trim()) this.stepErrors['p1name'] = 'Bride name is required';
+        if (!this.form.p2name.trim()) this.stepErrors['p2name'] = 'Groom name is required';
+        if (!this.form.email.trim()) {
+          this.stepErrors['email'] = 'Email is required';
+        } else if (!this.EMAIL_RE.test(this.form.email.trim())) {
+          this.stepErrors['email'] = 'Please enter a valid email';
+        }
+        if (!this.form.phone.trim()) {
+          this.stepErrors['phone'] = 'Phone number is required';
+        } else if (!this.PHONE_RE.test(this.form.phone.trim())) {
+          this.stepErrors['phone'] = 'Please enter a valid phone number';
+        }
+        if (!this.form.community) this.stepErrors['community'] = 'Please select a wedding tradition';
+        if (!this.form.city) this.stepErrors['city'] = 'Please select a city';
+        break;
+
+      case 1:
+        if (!this.form.weddingDate) this.stepErrors['weddingDate'] = 'Please pick a wedding date';
+        if (!this.form.guests) this.stepErrors['guests'] = 'Please select a guest count';
+        if (!this.form.venueType) this.stepErrors['venueType'] = 'Please choose a venue preference';
+        break;
+
+      case 2:
+        if (this.form.styles.size === 0) this.stepErrors['styles'] = 'Please select at least one style';
+        break;
+
+      case 3:
+        if (this.form.services.size === 0) this.stepErrors['services'] = 'Please select at least one priority';
+        break;
+    }
+
+    return Object.keys(this.stepErrors).length === 0;
+  }
+
+  private markAllFieldsTouchedForStep(step: number): void {
+    const fieldsByStep: Record<number, string[]> = {
+      0: ['p1name', 'p2name', 'email', 'phone', 'community', 'city'],
+      1: ['weddingDate', 'guests', 'venueType'],
+      2: ['styles'],
+      3: ['services'],
+    };
+    (fieldsByStep[step] || []).forEach(f => this.touched.add(f));
+  }
+
+  get stepValid(): boolean {
+    // Read-only check without mutating stepErrors
+    const errors: Record<string, string> = {};
+    switch (this.step) {
+      case 0:
+        if (!this.form.p1name.trim()) errors['p1name'] = '1';
+        if (!this.form.p2name.trim()) errors['p2name'] = '1';
+        if (!this.form.email.trim() || !this.EMAIL_RE.test(this.form.email.trim())) errors['email'] = '1';
+        if (!this.form.phone.trim() || !this.PHONE_RE.test(this.form.phone.trim())) errors['phone'] = '1';
+        if (!this.form.community) errors['community'] = '1';
+        if (!this.form.city) errors['city'] = '1';
+        break;
+      case 1:
+        if (!this.form.weddingDate) errors['weddingDate'] = '1';
+        if (!this.form.guests) errors['guests'] = '1';
+        if (!this.form.venueType) errors['venueType'] = '1';
+        break;
+      case 2:
+        if (this.form.styles.size === 0) errors['styles'] = '1';
+        break;
+      case 3:
+        if (this.form.services.size === 0) errors['services'] = '1';
+        break;
+    }
+    return Object.keys(errors).length === 0;
+  }
+
   // ─── Event handlers ────────────────────────
 
   onCommunityChange(): void {
@@ -339,6 +447,9 @@ export class IntakeFormComponent {
   }
 
   nextStep(): void {
+    this.markAllFieldsTouchedForStep(this.step);
+    if (!this.validateStep(this.step)) return;
+
     if (this.step < TOTAL_STEPS - 1) {
       this.goToStep(this.step + 1);
     } else {
@@ -394,7 +505,7 @@ export class IntakeFormComponent {
     return this.form.services.has(name);
   }
 
-  submitForm(): void {
+  async submitForm(): Promise<void> {
     const payload = {
       p1name: this.form.p1name,
       p2name: this.form.p2name,
@@ -416,13 +527,35 @@ export class IntakeFormComponent {
     };
 
     console.log('[ShaadiMe] Intake submission:', payload);
-    this.leadService.submitLead(payload).subscribe({
-      next: () => {
-        this.submitted = true;
-      },
-      error: (err) => {
-        console.error('Failed to submit lead', err);
+    this.submitting = true;
+    this.errorMsg = null;
+    this.cdr.detectChanges();
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Server responded with ${res.status}`);
       }
-    });
+
+      const data = await res.json();
+      console.log('[ShaadiMe] Lead saved:', data);
+      this.submitting = false;
+      this.submitted = true;
+    } catch (err) {
+      console.error('Failed to submit lead', err);
+      this.submitting = false;
+      this.errorMsg = 'We encountered a small glitch while saving your details. Please try again or reach out directly.';
+    } finally {
+      this.cdr.detectChanges();
+    }
+  }
+
+  goHome(): void {
+    this.router.navigate(['/']);
   }
 }
