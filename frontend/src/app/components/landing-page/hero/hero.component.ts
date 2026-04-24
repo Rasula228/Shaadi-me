@@ -6,8 +6,7 @@ import {
   Input,
   OnDestroy,
   Output,
-  QueryList,
-  ViewChildren
+  ViewChild
 } from '@angular/core';
 import { HeroSlide } from '../landing.types';
 
@@ -20,30 +19,29 @@ import { HeroSlide } from '../landing.types';
 export class HeroComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) slides: HeroSlide[] = [];
   @Output() startPlanning = new EventEmitter<void>();
-  @ViewChildren('heroVideo') private videoElements!: QueryList<ElementRef<HTMLVideoElement>>;
+  
+  @ViewChild('video1') private video1!: ElementRef<HTMLVideoElement>;
+  @ViewChild('video2') private video2!: ElementRef<HTMLVideoElement>;
 
   activeIndex = 0;
+  activePlayer: 1 | 2 = 1;
   private autoplayTimer: number | undefined;
-  private syncFrame: number | undefined;
 
   ngAfterViewInit() {
+    this.initializeVideos();
     this.startAutoplay();
-    this.scheduleVideoSync();
-    this.videoElements.changes.subscribe(() => this.scheduleVideoSync());
   }
 
   ngOnDestroy() {
     if (this.autoplayTimer) {
       window.clearInterval(this.autoplayTimer);
     }
-
-    if (this.syncFrame) {
-      window.cancelAnimationFrame(this.syncFrame);
-    }
   }
 
   selectSlide(index: number) {
-    this.setActiveIndex(index);
+    if (this.activeIndex === index) return;
+    this.activeIndex = index;
+    this.swapVideo();
     this.resetAutoplay();
   }
 
@@ -57,7 +55,8 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     }
 
     this.autoplayTimer = window.setInterval(() => {
-      this.setActiveIndex((this.activeIndex + 1) % this.slides.length);
+      this.activeIndex = (this.activeIndex + 1) % this.slides.length;
+      this.swapVideo();
     }, 7000);
   }
 
@@ -68,46 +67,46 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     this.startAutoplay();
   }
 
-  private setActiveIndex(index: number) {
-    this.activeIndex = index;
-    this.scheduleVideoSync();
+  private initializeVideos() {
+    if (!this.slides.length || !this.video1 || !this.video2) return;
+    
+    // Set the initial active video to the first slide
+    this.video1.nativeElement.src = this.slides[0].video;
+    
+    // Preload the next slide in the background video
+    if (this.slides.length > 1) {
+      this.video2.nativeElement.src = this.slides[1].video;
+    }
   }
 
-  private syncVideos() {
-    if (!this.videoElements) {
-      return;
+  private swapVideo() {
+    if (!this.video1 || !this.video2) return;
+
+    const currentSlide = this.slides[this.activeIndex];
+    
+    // Toggle the active player flag to trigger CSS crossfade
+    this.activePlayer = this.activePlayer === 1 ? 2 : 1;
+    
+    const activeVideo = this.activePlayer === 1 ? this.video1.nativeElement : this.video2.nativeElement;
+    const inactiveVideo = this.activePlayer === 1 ? this.video2.nativeElement : this.video1.nativeElement;
+
+    // Ensure the new active video has the correct src. 
+    // Usually it was preloaded in the previous step, but we check just in case.
+    if (!activeVideo.src.endsWith(currentSlide.video)) {
+      activeVideo.src = currentSlide.video;
     }
 
-    this.videoElements.forEach((videoRef, index) => {
-      const video = videoRef.nativeElement;
-      
-      // Ensure all standard attributes are set
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
+    // Give the active video a programmatic push to play just in case autoplay fails
+    activeVideo.play().catch(() => {});
 
-      if (index === this.activeIndex) {
-        // Simply attempt to play the active video. The browser handles buffering automatically.
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay might be blocked or loading, ignore the error
-          });
-        }
-      } else {
-        video.pause();
-      }
-    });
-  }
-
-  private scheduleVideoSync() {
-    if (this.syncFrame) {
-      window.cancelAnimationFrame(this.syncFrame);
-    }
-
-    this.syncFrame = window.requestAnimationFrame(() => {
-      this.syncVideos();
-      this.syncFrame = undefined;
-    });
+    // Prepare the inactive video for the *next* slide in the sequence
+    const nextIndex = (this.activeIndex + 1) % this.slides.length;
+    
+    // Wait for the CSS opacity transition (0.9s) to finish before changing the inactive video's source
+    setTimeout(() => {
+      inactiveVideo.src = this.slides[nextIndex].video;
+      // Preload it silently
+      inactiveVideo.load();
+    }, 1000);
   }
 }

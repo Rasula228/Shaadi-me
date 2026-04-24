@@ -1,17 +1,25 @@
 <section id="hero" class="hero hero-carousel">
   <div class="hero-media" aria-hidden="true">
-    <ng-container *ngFor="let slide of slides; let i = index">
-      <video
-        #heroVideo
-        class="hero-video"
-        [class.is-active]="activeIndex === i"
-        [src]="slide.video"
-        [muted]="true"
-        [defaultMuted]="true"
-        loop
-        playsinline
-      ></video>
-    </ng-container>
+    <video
+      #video1
+      class="hero-video"
+      [class.is-active]="activePlayer === 1"
+      [muted]="true"
+      [defaultMuted]="true"
+      autoplay
+      loop
+      playsinline
+    ></video>
+    <video
+      #video2
+      class="hero-video"
+      [class.is-active]="activePlayer === 2"
+      [muted]="true"
+      [defaultMuted]="true"
+      autoplay
+      loop
+      playsinline
+    ></video>
     <div class="hero-media-overlay"></div>
     <div class="hero-vignette"></div>
   </div>
