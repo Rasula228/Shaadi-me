@@ -214,8 +214,8 @@
           </span>
         </div>
         <div class="pf-field">
-          <label class="pf-label">Guest Count</label>
-          <select class="pf-input" [(ngModel)]="form.guests"
+          <label class="pf-label" for="guests">Guest Count</label>
+          <select id="guests" class="pf-input" [(ngModel)]="form.guests"
                   [class.is-placeholder]="!form.guests"
                   [class.pf-input-error]="hasTouched('guests') && hasError('guests')">
             <option value="">Select range</option>
@@ -228,8 +228,8 @@
       </div>
 
       <div class="pf-field">
-        <label class="pf-label">Venue Preference</label>
-        <select class="pf-input" [(ngModel)]="form.venueType"
+        <label class="pf-label" for="venueType">Venue Preference</label>
+        <select id="venueType" class="pf-input" [(ngModel)]="form.venueType"
                 [class.is-placeholder]="!form.venueType"
                 [class.pf-input-error]="hasTouched('venueType') && hasError('venueType')">
           <option value="">Select venue type</option>
@@ -242,10 +242,11 @@
 
       <!-- Budget slider -->
       <div class="pf-field">
-        <label class="pf-label">Overall Budget</label>
+        <label class="pf-label" for="budgetSlider">Overall Budget</label>
         <div class="pf-budget-display">{{ budgetDisplay }}</div>
         <div class="pf-budget-slider-container">
           <input
+            id="budgetSlider"
             type="range"
             class="pf-budget-input"
             [min]="1"
