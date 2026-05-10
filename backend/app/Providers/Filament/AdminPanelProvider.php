@@ -27,13 +27,18 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->domain(env('FILAMENT_DOMAIN'))
             ->path('')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->brandName('ShaadiMe CRM')
             ->colors([
-                'primary' => Color::hex('#8B0000'),
-                'gray' => Color::Zinc,
+                'primary' => Color::hex('#b01f68'),
+                'danger' => Color::hex('#ff5757'),
+                'warning' => Color::hex('#c9a96e'),
+                'info' => Color::hex('#4b1248'),
+                'gray' => Color::Stone,
             ])
-            ->darkMode(true)
+            ->darkMode(false)
+            ->font('Josefin Sans')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([

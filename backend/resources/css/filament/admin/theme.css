@@ -1,0 +1,50 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(216, 74, 130, 0.09), transparent 30%),
+        radial-gradient(circle at top right, rgba(75, 18, 72, 0.08), transparent 26%),
+        linear-gradient(180deg, #fffefd 0%, #fdf7f8 100%) !important;
+    background-attachment: fixed !important;
+    color: #4b1248;
+}
+
+/* Primary Button Styling */
+.fi-btn-color-primary {
+    background: linear-gradient(135deg, #b01f68 0%, #d84a82 100%) !important;
+    border: none !important;
+    box-shadow: 0 8px 28px rgb(229 152 155 / 0.35) !important;
+    color: white !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+}
+
+.fi-btn-color-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 14px 40px rgb(176 31 104 / 0.5) !important;
+}
+
+/* Premium Feel for Layout */
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(18px) !important;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.16) !important;
+}
+
+.fi-sidebar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(18px) !important;
+    border-right: 1px solid rgba(201, 169, 110, 0.16) !important;
+}
+
+/* Card and Stat Styling */
+.fi-wi-stats-overview-stat,
+.fi-ta-record,
+.fi-fo-component-container {
+    border-radius: 1.5rem !important;
+    border: 1px solid rgba(201, 169, 110, 0.16) !important;
+    background: rgba(255, 255, 255, 0.86) !important;
+    box-shadow: 0 16px 40px rgba(75, 18, 72, 0.06) !important;
+}
