@@ -19,9 +19,10 @@
         <article *ngFor="let city of cities; let i = index" class="city-card" [attr.data-index]="i">
           <div class="city-photo">
             <img
-              [src]="city.image"
+              [ngSrc]="city.image"
               [alt]="city.name"
               [style.object-position]="city.objectPosition"
+              fill
               referrerpolicy="no-referrer"
             />
           </div>

@@ -19,8 +19,9 @@
         <article *ngFor="let venue of venues; let i = index" class="venue-card" [attr.data-index]="i">
           <div class="venue-img-wrap">
             <img
-              [src]="venue.image"
+              [ngSrc]="venue.image"
               [alt]="venue.name"
+              fill
               referrerpolicy="no-referrer"
             />
           </div>

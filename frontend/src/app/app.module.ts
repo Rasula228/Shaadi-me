@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
 
@@ -64,7 +64,8 @@ import { WhyShaadiMeComponent } from './components/landing-page/why-shaadime/why
     HttpClientModule,
     CommonModule,
     FormsModule,
-    DividerModule
+    DividerModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
